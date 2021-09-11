@@ -3,9 +3,12 @@ package AondeFruta;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.time.Year;
-import java.sql.DriverManager;
 import java.sql.Date;
+import java.sql.DriverManager;
+import java.text.SimpleDateFormat;
+
+
+import java.text.ParseException;
 
 public class MySQL {
 
@@ -32,7 +35,7 @@ public class MySQL {
     return conn;
   }
 
-  public static void addUser(Connection conn, String name, String last_name, String email, Date birth_date, int discoveres,  String user_name, String password){
+  public static void addUser(Connection conn, String name, String last_name, String email, Date birth_date, int discoveres, String user_name, String password){
     String query = "INSERT INTO aonde_fruta.users ("
       + "name, "
       + "last_name, "
@@ -66,10 +69,13 @@ public class MySQL {
 
   }
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws ParseException {
     System.out.println("Aonde Fruta DB");
 		MySQL post = new MySQL();
-		addUser(post.connection(), "Giselle", "Gomes", "giselle@afruta.com.br", '1978-05-18', 5, "giFinder006", 147855);
+    SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+    Date formatedDate = (Date) format.parse("1976/05/03");
+
+		addUser(post.connection(), "Giselle", "Gomes", "giselle@afruta.com.br", formatedDate, 5, "giFinder006", "147855");
     //listUsers(post.connect());
 		//getUsers(post.connect(), 200);
     //deleteUsers(post.connect(), 200);
