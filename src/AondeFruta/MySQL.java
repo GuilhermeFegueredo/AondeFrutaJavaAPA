@@ -1,9 +1,6 @@
 package AondeFruta;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class MySQL {
 
@@ -58,15 +55,96 @@ public class MySQL {
     }
   }
 
+  public static void getUser(Connection conn, int _id) {
+
+    try {
+      Statement stmt = conn.createStatement();
+      ResultSet rs;
+      rs = stmt.executeQuery("SELECT id, name, last_name FROM aondefruta.users WHERE id = " + _id);
+      while ( rs.next() ) {
+        String id = rs.getString("id");
+        String name = rs.getString("name");
+        String last_name = rs.getString("last_name");
+        System.out.println(id + "|" + name + "|" + last_name);
+      }
+      conn.close();
+    } catch (Exception e) {
+      System.err.println("Got an exception! ");
+      System.err.println(e.getMessage());
+    }
+  }
+
+  public static void listUsers(Connection conn) {
+
+    try {
+      Statement stmt = conn.createStatement();
+      ResultSet rs;
+      rs = stmt.executeQuery("SELECT id, name, last_name, discoveres, user_name FROM aondefruta.users");
+      while ( rs.next() ) {
+        String id = rs.getString("id");
+        String name = rs.getString("name");
+        String last_name = rs.getString("last_name");
+        String discoveres = rs.getString("discoveres");
+        String user_name = rs.getString("user_name");
+        System.out.println(id + "|" + name + "|" + last_name + "| Trees: " + discoveres + " | userName: " + user_name);
+      }
+      conn.close();
+    } catch (Exception e) {
+      System.err.println("Got an exception! ");
+      System.err.println(e.getMessage());
+    }
+  }
+
+  public static void deleteUser(Connection conn, int _id) {
+    try {
+      Statement stmt = conn.createStatement();
+      ResultSet select;
+      ResultSet rs;
+      select = stmt.executeQuery("SELECT id, name, last_name FROM aondefruta.users WHERE id = " + _id);
+      while ( select.next() ) {
+        String id = select.getString("id");
+        String name = select.getString("name");
+        String last_name = select.getString("last_name");
+        System.out.println(id + "|" + name + "|" + last_name + " was deleted");
+      }
+      rs = stmt.executeQuery("DELETE FROM aondefruta.users WHERE id = " + _id);
+
+      conn.close();
+    } catch (Exception e) {
+      System.err.println("Got an exception! ");
+      System.err.println(e.getMessage());
+    }
+  }
+
+  public static void updateNameUser(Connection conn, int _id, String _name) {
+    try {
+      Statement stmt = conn.createStatement();
+      ResultSet select;
+      ResultSet rs;
+      select = stmt.executeQuery("SELECT id, name, last_name FROM aondefruta.users WHERE id = " + _id);
+      while ( select.next() ) {
+        String id = select.getString("id");
+        String name = select.getString("name");
+        String last_name = select.getString("last_name");
+        System.out.println(id + "|" + name + "|" + last_name + " was updated!!!");
+      }
+      rs = stmt.executeQuery("UPDATE aondefruta.users SET name = '" + _name + "' WHERE id = " + _id);
+      conn.close();
+    } catch (Exception e) {
+      System.err.println("Got an exception! ");
+      System.err.println(e.getMessage());
+    }
+  }
+
   public static void main(String[] args) {
     System.out.println("Aonde Fruta DB");
 		MySQL post = new MySQL();
 
-		addUser(post.connect(), "Giselle", "Gomes", "giselle@afruta.com.br", "1976-05-03", 5, "giFinder006", "147855");
-    //listUsers(post.connect());
-		//getUsers(post.connect(), 200);
-    //deleteUsers(post.connect(), 200);
-    //updateUsers(post.connect(), 200);
+        //addUser(post.connect(), "Giselle", "Gomes", "fruta@afruta.com.br", "1999-05-03", 2, "pfsousa", "654789");
+        listUsers(post.connect());
+        //getUser(post.connect(), 3);
+       //deleteUser(post.connect(), 7);
+       //updateNameUser(post.connect(), 7, "Joe");
   }
 }
 
