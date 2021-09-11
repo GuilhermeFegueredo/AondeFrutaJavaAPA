@@ -1,49 +1,37 @@
 package AondeFruta;
 
+import java.util.Date;
+
 public class Users {
-  private int idUser;
   private String nameUser;
-  private String firstName;
-  private String lastName;
+  private String lastNameUser;
   private String emailUser;
+  private Date birthDate;
+  private int discoveres;
+  private String userName;
   private String password;
-  private String birthDate;
 
-  private Users(int id, String nameUser, String firstName, String lastName, String emailUser, String password, String birthDate) {
-    this.idUser = id;
+  private Users(String nameUser, String lastNameUser, String emailUser, Date birthDate, int discoveres, String userName, String password) {
     this.nameUser = nameUser;
-    this.firstName = firstName;
-    this.lastName = lastName;
+    this.lastNameUser = lastNameUser;
     this.emailUser = emailUser;
-    this.password = password;
     this.birthDate = birthDate;
+    this.discoveres = discoveres;
+    this.userName = userName;
+    this.password = password;
   }
 
-  public int getId(){
-    return idUser;
-  }
+  public String getNameUser(){ return nameUser; }
 
-  public String getNameUser(){
-    return nameUser;
-  }
+  public String getLastNameUser(){ return lastNameUser; }
 
-  public String getFirstName(){
-    return firstName;
-  }
+  public String getEmailUser(){ return emailUser; }
 
-  public String getLastName(){
-    return lastName;
-  }
+  public Date getBirthDate(){ return birthDate; }
 
-  public String getEmailUser(){
-    return emailUser;
-  }
+  public int getDiscoveres(){ return discoveres; }
 
-  public String getPassword(){
-    return password;
-  }
+  public String getUserName(){ return userName; }
 
-  public String getBirthDate(){
-    return birthDate;
-  }
+  public String getPassword(){ return password; }
 }
