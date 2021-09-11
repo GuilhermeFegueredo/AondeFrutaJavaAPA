@@ -31,13 +31,13 @@ public class MySQL {
     return conn;
   }
 
-  public static void addUser(Connection conn, String name_user, String last_name_user, String email_user, Date birth_date_user, int discoveres,  String user_name, String password){
+  public static void addUser(Connection conn, String name_user, String last_name_user, String email_user, Date birth_date, int discoveres,  String user_name, String password){
     String query = "INSERT INTO users ("
       + "id, "
       + "name_user, "
       + "last_name_user, "
       + "email_user, "
-      + "birth_date_user, "
+      + "birth_date, "
       + "discoveres, "
       + "user_name, "
       + "password, "
@@ -48,8 +48,8 @@ public class MySQL {
       st.setString(2, name_user);
       st.setString(3, last_name_user);
       st.setString(4, email_user);
-      st.setDate(5, birth_date_user);
-      st.setString(6, ("" + discoveres));
+      st.setDate(5, birth_date);
+      st.setInt(6, discoveres);
       st.setString(7, user_name);
       st.setString(8, password);
 
