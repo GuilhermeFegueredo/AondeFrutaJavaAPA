@@ -39,7 +39,7 @@ public class MySQL {
       + " user_name,"
       + " password"
       + ") VALUES ("
-      + "nextval('users_sequence'), ?, ?, ?, ?, ?, ?, ?)";
+      + "nextval('aondefruta.users_sequence'), ?, ?, ?, ?, ?, ?, ?)";
     try{
       PreparedStatement st = conn.prepareStatement(query);
       st.setString(1, name);
